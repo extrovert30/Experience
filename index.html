@@ -63,24 +63,29 @@
 </body>
 </html>
 ```html
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Наша история ❤️</title>
+<title>То, что я чувствую</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap');
 
 :root {
-    --bg: #160b10;
-    --bg2: #291019;
-    --rose: #d8899c;
-    --light: #f9e9ec;
-    --white: #fff8fa;
-    --muted: #c9aeb5;
+    --bg: #e9e5df;
+    --paper: #f5f2ed;
+    --dark: #20201e;
+    --muted: #77736d;
+    --line: #cbc5bc;
+    --accent: #866b61;
+    --light-accent: #b9a096;
 }
 
 * {
@@ -94,295 +99,628 @@ html {
 }
 
 body {
-    background:
-        radial-gradient(circle at 20% 20%, rgba(216,137,156,.12), transparent 30%),
-        radial-gradient(circle at 80% 70%, rgba(180,70,100,.10), transparent 35%),
-        var(--bg);
-    color: var(--white);
-    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
     overflow-x: hidden;
 }
 
-/* ---------------- BACKGROUND ---------------- */
-
-.noise {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: .035;
-    z-index: 100;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+::selection {
+    background: var(--dark);
+    color: white;
 }
 
-.petals {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
 
-.petal {
+/* =========================
+   ОБЩИЕ ЭЛЕМЕНТЫ
+========================= */
+
+.page-number {
     position: absolute;
-    top: -50px;
-    width: 10px;
-    height: 16px;
-    background: rgba(232,155,173,.55);
-    border-radius: 100% 0 100% 0;
-    animation: fall linear infinite;
-    filter: blur(.2px);
+    top: 35px;
+    right: 6vw;
+
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--muted);
 }
 
-@keyframes fall {
-    from {
-        transform: translateY(-50px) rotate(0deg);
-    }
-    to {
-        transform: translateY(110vh) translateX(100px) rotate(360deg);
-    }
+.label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
 }
 
-/* ---------------- HERO ---------------- */
+.line {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+}
+
+
+/* =========================
+   ПЕРВЫЙ ЭКРАН
+========================= */
 
 .hero {
-    min-height: 100vh;
+    min-height: 100svh;
+    padding: 120px 8vw 80px;
+
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+
     position: relative;
-    padding: 40px 20px;
-    z-index: 2;
 }
 
 .hero-content {
-    max-width: 900px;
-    animation: heroIn 1.8s ease forwards;
+    max-width: 1100px;
 }
 
-@keyframes heroIn {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero .label {
+    margin-bottom: 45px;
 }
 
-.small-title {
-    color: var(--rose);
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    font-size: 11px;
-    margin-bottom: 25px;
-}
-
-h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(65px, 12vw, 150px);
-    font-weight: 500;
-    line-height: .8;
+.hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(58px, 10vw, 145px);
+    font-weight: 400;
+    line-height: .93;
     letter-spacing: -4px;
 }
 
-.hero p {
-    margin: 35px auto;
-    max-width: 560px;
+.hero h1 em {
+    display: block;
+    padding-left: 12vw;
+}
+
+.hero-subtitle {
+    max-width: 620px;
+    margin-top: 60px;
+
     color: var(--muted);
-    font-size: 14px;
+    font-size: 16px;
     line-height: 2;
 }
 
 .scroll {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 10px;
+    position: absolute;
+    bottom: 40px;
+    left: 8vw;
+
+    display: flex;
     align-items: center;
-    color: var(--rose);
-    font-size: 10px;
+    gap: 15px;
+
+    color: var(--muted);
+    font-size: 9px;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
 
-.scroll span {
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(var(--rose), transparent);
+.scroll::after {
+    content: "";
+    width: 50px;
+    height: 1px;
+    background: var(--muted);
 }
 
-/* ---------------- SECTIONS ---------------- */
 
-section {
+/* =========================
+   ВСТУПЛЕНИЕ
+========================= */
+
+.introduction {
+    padding: 160px 8vw;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 100px;
+}
+
+.introduction-text {
+    max-width: 760px;
+}
+
+.introduction h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(40px, 5vw, 70px);
+    font-weight: 400;
+    line-height: 1.1;
+
+    margin-bottom: 45px;
+}
+
+.introduction p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   ПИСЬМО
+========================= */
+
+.letter-section {
+    padding: 80px 8vw 170px;
+}
+
+.letter {
+    max-width: 980px;
+    margin: auto;
+
+    background: var(--paper);
+
+    padding: clamp(45px, 8vw, 100px);
+
+    box-shadow: 0 35px 90px rgba(35,30,25,.08);
+
     position: relative;
-    z-index: 2;
 }
 
-.intro {
-    padding: 130px 20px 80px;
+.letter::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: var(--accent);
+}
+
+.letter-top {
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+
+    margin-bottom: 80px;
+}
+
+.letter h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(40px, 5vw, 65px);
+    font-weight: 400;
+    line-height: 1.1;
+
+    margin-bottom: 50px;
+}
+
+.letter p {
+    color: #62605c;
+    font-size: 16px;
+    line-height: 2.05;
+
+    margin-bottom: 28px;
+}
+
+.letter .large {
+    margin: 60px 0;
+
+    color: var(--dark);
+
+    font-family: "Playfair Display", serif;
+    font-size: clamp(25px, 3.2vw, 38px);
+    line-height: 1.45;
+}
+
+
+/* =========================
+   ПРИЧИНЫ
+========================= */
+
+.reasons {
+    padding: 150px 8vw;
+
+    background: #ded9d2;
+}
+
+.reasons-title {
+    max-width: 800px;
+    margin-bottom: 90px;
+}
+
+.reasons-title h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(43px, 6vw, 78px);
+    font-weight: 400;
+
+    margin-top: 25px;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+}
+
+.reason {
+    padding: 45px 35px 60px;
+
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    min-height: 350px;
+}
+
+.reason-number {
+    color: var(--accent);
+
+    font-size: 10px;
+    letter-spacing: 3px;
+
+    margin-bottom: 80px;
+}
+
+.reason h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 31px;
+    font-weight: 400;
+
+    margin-bottom: 25px;
+}
+
+.reason p {
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* =========================
+   О СЕБЕ
+========================= */
+
+.self {
+    padding: 190px 8vw;
+
     text-align: center;
 }
 
-.section-number {
-    color: var(--rose);
-    font-size: 11px;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
+.self-inner {
+    max-width: 900px;
+    margin: auto;
 }
 
-h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(45px, 7vw, 85px);
-    font-weight: 500;
+.self h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(45px, 7vw, 90px);
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    margin: 35px 0 50px;
 }
 
-.description {
-    max-width: 600px;
-    margin: 25px auto;
+.self p {
+    max-width: 650px;
+    margin: auto;
+
     color: var(--muted);
+
+    font-size: 16px;
     line-height: 2;
-    font-size: 14px;
 }
 
-/* ---------------- VIDEO ---------------- */
 
-.video-section {
+/* =========================
+   НАМЕРЕНИЯ
+========================= */
+
+.intentions {
+    padding: 150px 8vw;
+
+    background: var(--dark);
+    color: #eeeae4;
+}
+
+.intentions-inner {
     max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 20px 150px;
+    margin: auto;
 }
 
-.video-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    background: #080508;
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.5),
-        0 0 80px rgba(200,100,130,.08);
+.intentions h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(45px, 6vw, 78px);
+    font-weight: 400;
+
+    margin: 25px 0 90px;
 }
 
-.video-card::before {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border: 1px solid rgba(255,255,255,.12);
-    pointer-events: none;
-    z-index: 2;
+.intentions .label {
+    color: var(--light-accent);
 }
 
-video {
-    width: 100%;
-    display: block;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+.intention {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+
+    padding: 38px 0;
+
+    border-top: 1px solid rgba(255,255,255,.15);
 }
 
-.video-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 5px;
+.intention:last-child {
+    border-bottom: 1px solid rgba(255,255,255,.15);
 }
 
-.video-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-}
+.intention-number {
+    color: var(--light-accent);
 
-.video-time {
-    color: var(--rose);
     font-size: 10px;
     letter-spacing: 2px;
 }
 
-/* ---------------- QUOTE ---------------- */
+.intention p {
+    max-width: 760px;
 
-.quote {
-    padding: 130px 20px;
-    text-align: center;
-    background:
-        linear-gradient(
-            rgba(22,11,16,.65),
-            rgba(22,11,16,.95)
-        );
+    color: #b9b5af;
+
+    font-size: 15px;
+    line-height: 1.9;
 }
 
-.quote-text {
-    max-width: 800px;
+
+/* =========================
+   ВЛЮБЛЁННОСТЬ
+========================= */
+
+.feelings {
+    padding: 180px 8vw;
+}
+
+.feelings-inner {
+    max-width: 1000px;
     margin: auto;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(35px, 6vw, 65px);
-    line-height: 1.1;
-    font-style: italic;
 }
 
-.quote-author {
-    margin-top: 30px;
-    color: var(--rose);
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+.feelings h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(45px, 7vw, 90px);
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    margin: 30px 0 65px;
 }
 
-/* ---------------- FINAL ---------------- */
-
-.final {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 20px;
+.feelings-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
 }
 
-.heart {
-    font-size: 60px;
-    display: block;
-    margin-bottom: 30px;
-    animation: heartbeat 1.7s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    15% {
-        transform: scale(1.15);
-    }
-    30% {
-        transform: scale(1);
-    }
-    45% {
-        transform: scale(1.12);
-    }
-}
-
-.final h2 {
-    font-size: clamp(55px, 9vw, 110px);
-}
-
-.final p {
-    margin-top: 30px;
+.feelings-text p {
     color: var(--muted);
+
+    font-size: 15px;
     line-height: 2;
 }
 
-footer {
-    padding: 30px;
-    text-align: center;
-    color: #765963;
-    font-size: 10px;
-    letter-spacing: 3px;
+
+/* =========================
+   ВОСПОМИНАНИЯ
+========================= */
+
+.memories {
+    padding: 150px 8vw;
+
+    background: var(--paper);
 }
 
-/* ---------------- ANIMATION ---------------- */
+.memories-header {
+    max-width: 850px;
+    margin-bottom: 80px;
+}
+
+.memories-header h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(45px, 6vw, 78px);
+    font-weight: 400;
+
+    margin-top: 25px;
+}
+
+.memories-header p {
+    max-width: 650px;
+
+    margin-top: 30px;
+
+    color: var(--muted);
+
+    line-height: 1.9;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.memory {
+    min-height: 480px;
+
+    border: 1px solid var(--line);
+
+    padding: 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9e4dd,
+            #f6f3ee
+        );
+}
+
+.memory::before {
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    border: 1px solid rgba(134,107,97,.18);
+    border-radius: 50%;
+
+    right: -180px;
+    bottom: -180px;
+}
+
+.memory::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border: 1px solid rgba(134,107,97,.15);
+    border-radius: 50%;
+
+    right: -80px;
+    bottom: -80px;
+}
+
+.memory-number {
+    position: relative;
+    z-index: 2;
+
+    color: var(--accent);
+
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.memory-bottom {
+    position: relative;
+    z-index: 2;
+}
+
+.memory h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 400;
+
+    margin-bottom: 20px;
+}
+
+.memory p {
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   ФИНАЛ
+========================= */
+
+.final {
+    min-height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 100px 8vw;
+}
+
+.final-inner {
+    max-width: 950px;
+}
+
+.final .label {
+    margin-bottom: 40px;
+}
+
+.final h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(48px, 8vw, 110px);
+    font-weight: 400;
+
+    line-height: 1;
+
+    margin-bottom: 55px;
+}
+
+.final h2 em {
+    display: block;
+}
+
+.final p {
+    max-width: 680px;
+
+    margin: auto;
+
+    color: var(--muted);
+
+    font-size: 15px;
+    line-height: 2;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 30px 8vw;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--muted);
+
+    font-size: 9px;
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   АНИМАЦИИ
+========================= */
 
 .reveal {
     opacity: 0;
-    transform: translateY(45px);
-    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(35px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 .reveal.visible {
@@ -390,221 +728,203 @@ footer {
     transform: translateY(0);
 }
 
-/* ---------------- MOBILE ---------------- */
 
-@media (max-width: 600px) {
+/* =========================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================= */
 
-    h1 {
-        letter-spacing: -2px;
+@media (max-width: 700px) {
+
+    .page-number {
+        top: 25px;
+        right: 25px;
     }
 
     .hero {
-        min-height: 90vh;
+        padding: 100px 25px 80px;
     }
 
-    .video-section {
-        padding-bottom: 100px;
+    .hero h1 {
+        letter-spacing: -2px;
     }
 
-    .video-card::before {
-        inset: 7px;
+    .hero h1 em {
+        padding-left: 12vw;
     }
 
-    .video-info {
-        padding: 18px 2px;
+    .hero-subtitle {
+        margin-top: 40px;
+        font-size: 14px;
     }
 
-    .video-title {
-        font-size: 22px;
+    .introduction {
+        display: block;
+        padding: 110px 25px;
     }
 
-    .quote {
-        padding: 100px 25px;
+    .introduction .label {
+        margin-bottom: 45px;
+    }
+
+    .letter-section {
+        padding: 50px 15px 100px;
+    }
+
+    .letter {
+        padding: 50px 28px;
+    }
+
+    .letter-top {
+        margin-bottom: 55px;
+    }
+
+    .reasons {
+        padding: 110px 25px;
+    }
+
+    .reasons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reason {
+        min-height: auto;
+    }
+
+    .reason-number {
+        margin-bottom: 45px;
+    }
+
+    .self {
+        padding: 120px 25px;
+    }
+
+    .intentions {
+        padding: 110px 25px;
+    }
+
+    .intention {
+        grid-template-columns: 45px 1fr;
+        gap: 10px;
+    }
+
+    .feelings {
+        padding: 120px 25px;
+    }
+
+    .feelings-text {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .memories {
+        padding: 110px 25px;
+    }
+
+    .memory-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .memory {
+        min-height: 350px;
     }
 
     .final {
-        min-height: 70vh;
+        padding: 100px 25px;
+    }
+
+    footer {
+        padding: 25px;
+
+        flex-direction: column;
+        gap: 12px;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<div class="noise"></div>
 
-<div class="petals" id="petals"></div>
-
-<!-- HERO -->
+<!-- ==================================================
+     ПЕРВЫЙ ЭКРАН
+================================================== -->
 
 <section class="hero">
 
+    <div class="page-number">
+        01 / 01
+    </div>
+
     <div class="hero-content">
 
-        <div class="small-title">
-            история о нас
+        <div class="label">
+            личное письмо
         </div>
 
         <h1>
-            Ты & Я
+            То, что
+            <em>я чувствую.</em>
         </h1>
 
-        <p>
-            Иногда самые важные моменты нашей жизни
-            хочется сохранить не в памяти, а где-то ещё.
-            Чтобы однажды снова к ним вернуться.
+        <p class="hero-subtitle">
+            Это не попытка изменить прошлое
+            и не попытка дать название тому,
+            что между нами происходило.
+            Просто несколько честных слов
+            о человеке, который стал для меня
+            очень важен.
         </p>
 
-        <div class="scroll">
-            листай
-            <span></span>
-        </div>
+    </div>
 
+    <div class="scroll">
+        продолжить
     </div>
 
 </section>
 
 
-<!-- INTRO -->
+<div class="line"></div>
 
-<section class="intro reveal">
 
-    <div class="section-number">
-        01 — Воспоминание
+<!-- ==================================================
+     ВСТУПЛЕНИЕ
+================================================== -->
+
+<section class="introduction reveal">
+
+    <div class="label">
+        01 — начало
     </div>
 
-    <h2>
-        Один момент
-    </h2>
-
-    <p class="description">
-        Из тысячи часов можно выбрать всего одну минуту —
-        и она вдруг становится целой историей.
-    </p>
-
-</section>
-
-
-<!-- VIDEO 1 -->
-
-<section class="video-section reveal">
-
-    <div class="video-card">
-
-        <!-- ЗАМЕНИ video1.mp4 НА СВОЁ ВИДЕО -->
-
-        <video
-            id="video1"
-            muted
-            playsinline
-            preload="metadata"
-            controls
-        >
-            <source src="video1.mp4" type="video/mp4">
-        </video>
-
-    </div>
-
-    <div class="video-info">
-
-        <div class="video-title">
-            Момент, который хочется помнить
-        </div>
-
-        <div class="video-time">
-            01:10:02 — 01:11:02
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- QUOTE -->
-
-<section class="quote reveal">
-
-    <div class="quote-text">
-        «Самые красивые воспоминания —
-        те, в которых мы были по-настоящему счастливы.»
-    </div>
-
-    <div class="quote-author">
-        наша история
-    </div>
-
-</section>
-
-
-<!-- VIDEO 2 -->
-
-<section class="intro reveal">
-
-    <div class="section-number">
-        02 — Ещё один момент
-    </div>
-
-    <h2>
-        И снова мы
-    </h2>
-
-    <p class="description">
-        Потому что одной минуты иногда недостаточно,
-        чтобы рассказать целую историю.
-    </p>
-
-</section>
-
-
-<section class="video-section reveal">
-
-    <div class="video-card">
-
-        <!-- ЗАМЕНИ video2.mp4 НА СВОЁ ВИДЕО -->
-
-        <video
-            id="video2"
-            muted
-            playsinline
-            preload="metadata"
-            controls
-        >
-            <source src="video2.mp4" type="video/mp4">
-        </video>
-
-    </div>
-
-    <div class="video-info">
-
-        <div class="video-title">
-            Ещё одно воспоминание
-        </div>
-
-        <div class="video-time">
-            01:23:07 — 01:24:11
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FINAL -->
-
-<section class="final reveal">
-
-    <div>
-
-        <span class="heart">♥</span>
+    <div class="introduction-text">
 
         <h2>
-            Продолжение<br>
-            следует...
+            Некоторые чувства
+            появляются раньше,
+            чем мы понимаем,
+            что с ними делать.
         </h2>
 
         <p>
-            Ведь самая красивая история —
-            та, которую мы пишем вместе.
+            Я долго не мог нормально сформулировать,
+            что именно чувствую.
+        </p>
+
+        <p>
+            Сначала это казалось обычной симпатией.
+            Но со временем человек стал для меня
+            действительно важным и близким
+            в эмоциональном смысле.
+        </p>
+
+        <p>
+            Наверное, именно поэтому мне хочется
+            рассказать об этом спокойно и честно —
+            без громких обещаний и без попытки
+            чего-либо требовать.
         </p>
 
     </div>
@@ -612,143 +932,484 @@ footer {
 </section>
 
 
+<!-- ==================================================
+     ПИСЬМО
+================================================== -->
+
+<section class="letter-section">
+
+    <div class="letter reveal">
+
+        <div class="letter-top">
+            <span>
+                несколько честных мыслей
+            </span>
+
+            <span>
+                без ожиданий
+            </span>
+        </div>
+
+        <h2>
+            Почему я решил
+            об этом рассказать
+        </h2>
+
+        <p>
+            Наверное, я слишком долго держал это внутри.
+            Пытался рационализировать свои чувства,
+            найти им объяснение или убедить себя,
+            что со временем всё просто исчезнет.
+        </p>
+
+        <p>
+            Но человек может понимать ситуацию головой
+            и всё равно продолжать что-то чувствовать.
+        </p>
+
+        <p class="large">
+            Я не хочу делать вид,
+            будто ты ничего для меня не значишь.
+        </p>
+
+        <p>
+            Это не признание с требованием ответа.
+            Не попытка поставить тебя в неудобное положение.
+            Мне просто хочется поделиться тем,
+            что долго оставалось внутри меня.
+        </p>
+
+        <p>
+            Для меня важно сказать это спокойно,
+            без давления и без желания изменить
+            твой взгляд на происходящее.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ОБСТОЯТЕЛЬСТВА
+================================================== -->
+
+<section class="reasons">
+
+    <div class="reasons-title reveal">
+
+        <div class="label">
+            02 — то, что повлияло
+        </div>
+
+        <h2>
+            Почему всё оказалось
+            не так просто
+        </h2>
+
+    </div>
+
+
+    <div class="reasons-grid">
+
+
+        <article class="reason reveal">
+
+            <div class="reason-number">
+                01
+            </div>
+
+            <h3>
+                Разница в возрасте
+            </h3>
+
+            <p>
+                Это реальное обстоятельство,
+                которое нельзя просто убрать
+                красивыми словами.
+                Оно сильно повлияло на то,
+                как всё складывалось.
+            </p>
+
+        </article>
+
+
+        <article class="reason reveal">
+
+            <div class="reason-number">
+                02
+            </div>
+
+            <h3>
+                Постоянный самоанализ
+            </h3>
+
+            <p>
+                Я привык слишком долго прокручивать
+                в голове свои слова и поступки,
+                искать ошибки и думать,
+                что мог сделать иначе.
+                Иногда это не позволяет мне
+                просто принять происходящее.
+            </p>
+
+        </article>
+
+
+        <article class="reason reveal">
+
+            <div class="reason-number">
+                03
+            </div>
+
+            <h3>
+                Обстоятельства
+            </h3>
+
+            <p>
+                Иногда чувства появляются в момент,
+                когда обстоятельства не позволяют им
+                развиваться так, как хотелось бы.
+                И не всё в жизни можно изменить
+                одним только желанием.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     О СЕБЕ
+================================================== -->
+
+<section class="self reveal">
+
+    <div class="self-inner">
+
+        <div class="label">
+            03 — о себе
+        </div>
+
+        <h2>
+            Я слишком часто
+            ищу причину в себе.
+        </h2>
+
+        <p>
+            Возможно, мне ещё предстоит научиться
+            принимать то, что не всё в моей жизни
+            зависит от моих действий.
+            Не каждое несостоявшееся событие
+            означает, что я сделал что-то неправильно.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     НАМЕРЕНИЯ
+================================================== -->
+
+<section class="intentions">
+
+    <div class="intentions-inner">
+
+        <div class="label">
+            04 — мои намерения
+        </div>
+
+        <h2>
+            Что я хочу
+            этим сказать
+        </h2>
+
+
+        <div class="intention reveal">
+
+            <div class="intention-number">
+                01
+            </div>
+
+            <p>
+                Я хочу быть честным насчёт своей
+                привязанности, не пытаясь делать вид,
+                что её нет.
+            </p>
+
+        </div>
+
+
+        <div class="intention reveal">
+
+            <div class="intention-number">
+                02
+            </div>
+
+            <p>
+                Я хочу, чтобы ты знала:
+                мои чувства — это моя ответственность.
+                Тебе не нужно отвечать на них
+                только потому, что я ими поделился.
+            </p>
+
+        </div>
+
+
+        <div class="intention reveal">
+
+            <div class="intention-number">
+                03
+            </div>
+
+            <p>
+                Я хочу уважать твои решения,
+                твои границы и те обстоятельства,
+                которые существуют между нами.
+            </p>
+
+        </div>
+
+
+        <div class="intention reveal">
+
+            <div class="intention-number">
+                04
+            </div>
+
+            <p>
+                И если однажды я оглянусь назад,
+                мне хочется помнить не только
+                о том, что не получилось,
+                но и о том, что этот человек
+                был мне по-настоящему дорог.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ВЛЮБЛЁННОСТЬ
+================================================== -->
+
+<section class="feelings reveal">
+
+    <div class="feelings-inner">
+
+        <div class="label">
+            05 — влюблённость
+        </div>
+
+        <h2>
+            Наверное, это и есть
+            самое сложное признание.
+        </h2>
+
+
+        <div class="feelings-text">
+
+            <p>
+                Мне нравилось думать о тебе.
+                Нравилось узнавать тебя,
+                запоминать мелочи,
+                возвращаться мыслями
+                к нашим разговорам.
+            </p>
+
+            <p>
+                И чем больше я пытался разобраться
+                в собственных чувствах,
+                тем сильнее понимал,
+                что это уже не просто случайный интерес.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ВОСПОМИНАНИЯ
+================================================== -->
+
+<section class="memories">
+
+    <div class="memories-header reveal">
+
+        <div class="label">
+            06 — два воспоминания
+        </div>
+
+        <h2>
+            Некоторые моменты
+            я всё равно хочу сохранить.
+        </h2>
+
+        <p>
+            Здесь могли бы быть два небольших
+            видеофрагмента.
+            Я оставил для них спокойные места,
+            чтобы воспоминания не выглядели
+            как доказательство чего-либо.
+            Это просто моменты, которые
+            остались в моей памяти.
+        </p>
+
+    </div>
+
+
+    <div class="memory-grid">
+
+
+        <div class="memory reveal">
+
+            <div class="memory-number">
+                ФРАГМЕНТ / 01
+            </div>
+
+            <div class="memory-bottom">
+
+                <h3>
+                    01:10:02 — 01:11:02
+                </h3>
+
+                <p>
+                    Первый выбранный фрагмент.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="memory reveal">
+
+            <div class="memory-number">
+                ФРАГМЕНТ / 02
+            </div>
+
+            <div class="memory-bottom">
+
+                <h3>
+                    01:23:07 — 01:24:11
+                </h3>
+
+                <p>
+                    Второй выбранный фрагмент.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ФИНАЛ
+================================================== -->
+
+<section class="final reveal">
+
+    <div class="final-inner">
+
+        <div class="label">
+            последнее
+        </div>
+
+        <h2>
+            Я не знаю,
+            <em>что будет дальше.</em>
+        </h2>
+
+        <p>
+            Но я знаю, что хотел сказать это честно.
+            Ты стала для меня человеком,
+            к которому я почувствовал сильную
+            привязанность и влюблённость.
+            И даже если всё сложилось не так,
+            как мне когда-то хотелось,
+            это не делает мои чувства ненастоящими.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
 <footer>
-    made with love ♥
+
+    <span>
+        личное письмо
+    </span>
+
+    <span>
+        без требований и ожиданий
+    </span>
+
 </footer>
 
 
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script>
 
-/* ---------------- PETALS ---------------- */
-
-const petals = document.getElementById("petals");
-
-for (let i = 0; i < 25; i++) {
-
-    const petal = document.createElement("div");
-
-    petal.className = "petal";
-
-    petal.style.left = Math.random() * 100 + "%";
-    petal.style.animationDuration =
-        (7 + Math.random() * 10) + "s";
-
-    petal.style.animationDelay =
-        Math.random() * 10 + "s";
-
-    petal.style.opacity =
-        .2 + Math.random() * .5;
-
-    petal.style.transform =
-        `scale(${.5 + Math.random()})`;
-
-    petals.appendChild(petal);
-}
-
-
-/* ---------------- SCROLL REVEAL ---------------- */
-
 const observer = new IntersectionObserver(
-    entries => {
 
-        entries.forEach(entry => {
+    (entries) => {
+
+        entries.forEach((entry) => {
 
             if (entry.isIntersecting) {
+
                 entry.target.classList.add("visible");
+
+                observer.unobserve(entry.target);
+
             }
 
         });
 
     },
+
     {
-        threshold: .12
+        threshold: 0.12
     }
+
 );
+
 
 document
     .querySelectorAll(".reveal")
-    .forEach(el => observer.observe(el));
+    .forEach((element) => {
 
+        observer.observe(element);
 
-/* ---------------- VIDEO 1 ---------------- */
-
-const video1 = document.getElementById("video1");
-
-const START_1 = 1 * 3600 + 10 * 60 + 2;
-const END_1   = 1 * 3600 + 11 * 60 + 2;
-
-video1.addEventListener("loadedmetadata", () => {
-
-    video1.currentTime = START_1;
-
-});
-
-video1.addEventListener("timeupdate", () => {
-
-    if (video1.currentTime >= END_1) {
-        video1.pause();
-        video1.currentTime = START_1;
-    }
-
-});
-
-
-/* ---------------- VIDEO 2 ---------------- */
-
-const video2 = document.getElementById("video2");
-
-const START_2 = 1 * 3600 + 23 * 60 + 7;
-const END_2   = 1 * 3600 + 24 * 60 + 11;
-
-video2.addEventListener("loadedmetadata", () => {
-
-    video2.currentTime = START_2;
-
-});
-
-video2.addEventListener("timeupdate", () => {
-
-    if (video2.currentTime >= END_2) {
-        video2.pause();
-        video2.currentTime = START_2;
-    }
-
-});
-
-
-/* ---------------- AUTOPLAY WHEN VISIBLE ---------------- */
-
-const videoObserver = new IntersectionObserver(
-    entries => {
-
-        entries.forEach(entry => {
-
-            const video = entry.target;
-
-            if (entry.isIntersecting) {
-
-                video.play().catch(() => {});
-
-            } else {
-
-                video.pause();
-
-            }
-
-        });
-
-    },
-    {
-        threshold: .55
-    }
-);
-
-document
-    .querySelectorAll("video")
-    .forEach(video => videoObserver.observe(video));
+    });
 
 </script>
 
+
 </body>
 </html>
-```
