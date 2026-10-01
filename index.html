@@ -4,40 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Видео</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
-      width: 100%;
-      height: 100%;
+      padding: 0;
       background: #000;
-      overflow: hidden;
+      min-height: 100%;
     }
+
     body {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 20px;
+      padding: 20px 0;
     }
+
     .video {
-      width: min(100vw, 177.7778vh);
+      width: 100%;
+      max-width: 900px;
       aspect-ratio: 16 / 9;
     }
+
     iframe {
-      display: block;
       width: 100%;
       height: 100%;
       border: 0;
+      display: block;
     }
   </style>
 </head>
+
 <body>
+
+  <!-- ВИДЕО 1 -->
   <div class="video">
     <iframe
-      src="https://www.youtube.com/embed/NMUBadWBJnM?rel=0"
-      title="Видео"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      src="https://rutube.ru/play/embed/e4dea4bc9130570bc1c241430c51e8d8/"
+      allow="autoplay; fullscreen"
       allowfullscreen>
     </iframe>
   </div>
+
+  <!-- ВИДЕО 2 -->
+  <div class="video">
+    <iframe
+      src="https://rutube.ru/play/embed/73a16e29ff6e83a6908f4034ea502b11/"
+      allow="autoplay; fullscreen"
+      allowfullscreen>
+    </iframe>
+  </div>
+
 </body>
 </html>
